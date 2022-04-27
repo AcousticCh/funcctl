@@ -1,5 +1,5 @@
 #!/bin/bash
-#fix whereis command
+
 search()
 {
 	case $1 in
@@ -54,18 +54,26 @@ search()
 		;;
 
 		*)
-		echo "Commands: "
+		echo "The search command is a convienent way of using many search commands well only remembering one."
+		echo "The --help page also lists the commands search wraps as a quick refernce so you can use those"
+		echo "commands at their full power"
+		echo "-----------------------------------------------------------------------------------------------"
+		echo "Commands and Options: "
 		echo "find:"
-		echo "	-ff, --findfile: Uses find command to find files, "
-		echo "		ex: search -ff <file> <dir tree to search>"
-		echo "	-fd, --finddir: Uses find command to find directories, "
-		echo "		ex: search -fd <dir> <dir tree to search>"
+		echo "	-ff, --findfile: "
+		echo "			Uses find command to find files,"
+		echo "			ex: search -ff <file> <dir tree to search>"
+		echo "	-fd, --finddir: "
+		echo "			Uses find command to find directories,"
+		echo "			ex: search -fd <dir> <dir tree to search>"
 		echo "locate:"
-		echo "	-l, --locate: updates database and uses locate command to find files or directories"
-		echo "		ex: search -l <file/dir>"
+		echo "	-l, --locate: "
+		echo "			runs updatedb command and uses locate command to find files or directories"
+		echo "			ex: search -l <file/dir>"
 		echo "grep:"
-		echo "	-r, --regex: refine any search by adding grep as a final parameter"
-		echo "		ex: search -l <file> -r <keyword>"
+		echo "	-r, --regex: "
+		echo "			refine any search by adding grep as a final parameter"
+		echo "			ex: search -l <file> -r <keyword>"
 		;;
 	esac
 
@@ -76,11 +84,21 @@ envctl()
 	if [ $1 = "-c" ] || [ $1 = "--create" ]
 	then
 		python3 -m venv $2
-		echo $(pwd)/$2 >> ~/text_files/my_environment.txt
+		echo $(pwd)/$2 >> ~/text_files/my_environments.txt
 	elif [ $1 = "-a" ] || [ $1 = "--activate" ]
 	then
 		source ./$2/bin/activate
 	else
-		echo "Invalid option"
+		echo "The envctl (environment controller) speeds up and simplifies the creation and use of a python3 venv"
+		echo "Options: "
+		echo "	-c, --create: "
+		echo "			Creates a python3 virtual environment in present working directory"
+		echo "			ex: envctl -c <env_name>"
+		echo "	-a, --activate: "
+		echo "			Activates an environment quickly by name"
+		echo "			ex: envctl -a <env_name>"
+		echo "deactivation of an environment is a function of the venv module itself,"
+		echo "in the directory you activated your environment you deactivate it by simply tyiping deactivate"
+		echo "			ex: deactivate"
 	fi
 }
