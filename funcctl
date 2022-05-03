@@ -1,5 +1,5 @@
 #!/bin/bash
-
+#add --help option to help menu
 search()
 {
 	case $1 in
@@ -34,19 +34,28 @@ search()
 			"-r" | "--regex")
 			sudo locate $2 | grep $4
 			;;
-
 			*)
 			sudo locate $2
 			;;
 		esac
 		;;
 
-		"-w" | "--whereis")
+		"-w" | "--which")
+		case $3 in
+			"-r" | "--regex")
+			which $2 | grep $4
+			;;
+			*)
+			which $2
+			;;
+		esac
+		;;
+
+		"-ws" | "--whereis")
 		case $3 in
 			"-r" | "--regex")
                         whereis $2 | grep $4
                         ;;
-
 			*)
 			whereis $2
 			;;
@@ -58,7 +67,7 @@ search()
 		echo "The --help page also lists the commands search wraps as a quick refernce so you can use those"
 		echo "commands at their full power"
 		echo "-----------------------------------------------------------------------------------------------"
-		echo "Commands and Options: "
+		echo "Commands and Options:"
 		echo "find:"
 		echo "	-ff, --findfile: "
 		echo "			Uses find command to find files,"
@@ -70,6 +79,14 @@ search()
 		echo "	-l, --locate: "
 		echo "			runs updatedb command and uses locate command to find files or directories"
 		echo "			ex: search -l <file/dir>"
+		echo "which:"
+		echo "	-w, --which:"
+		echo "			Uses which command to find programs and applications"
+		echo "			ex: which <file>"
+		echo "whereis:"
+		echo "	-ws, --whereis: "
+		echo "			Uses whereis command to find programs, source files and man files in a broad search range"
+		echo "			ex: whereis <file>"
 		echo "grep:"
 		echo "	-r, --regex: "
 		echo "			refine any search by adding grep as a final parameter"
