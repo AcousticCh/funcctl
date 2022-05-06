@@ -1,5 +1,5 @@
 #!/bin/bash
-#add --help option to help menu
+
 search()
 {
 	case $1 in
@@ -62,7 +62,7 @@ search()
 		esac
 		;;
 
-		*)
+		"-h" | "--help")
 		echo "The search command is a convienent way of using many search commands well only remembering one."
 		echo "The --help page also lists the commands search wraps as a quick refernce so you can use those"
 		echo "commands at their full power"
@@ -91,6 +91,10 @@ search()
 		echo "	-r, --regex: "
 		echo "			refine any search by adding grep as a final parameter"
 		echo "			ex: search -l <file> -r <keyword>"
+		;;
+
+		*)
+		echo "Type search -h or search --help for options and examples"
 		;;
 	esac
 
