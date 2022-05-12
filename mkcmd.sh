@@ -5,7 +5,7 @@
 #add a third argument for a choice of bin dir or if /usr/bin not found
 #make .py version then put .py and .sh version in  seperate functions to be called in makecommand() depending on option
 #make seperate move command
-
+#make update manpage function
 
 
 makebash () {
@@ -17,6 +17,12 @@ makebash () {
 makepython () {
     chmod 755 $2
     cp $2 /usr/bin/$1
+}
+
+# 1 is command name 2 is text file 3 is section number
+make_manpage () {
+    cp $2 /usr/share/man/man$3/$1.$3
+    gzip /usr/share/man/man$3/$1.$3
 }
 
 makecommandhelpmenu () {
@@ -37,6 +43,14 @@ makecommand () {
     case $1 in
         "-h" | "--help")
         makecommandhelpmenu
+        ;;
+        "-m" | "--manpage")
+        # make manpage <command name> <manpage file> <manpage section>
+        make_manpage $2 $3 $4
+        ;;
+        "-r" | "--remove")
+        rm -rf /usr/bin/$2
+        #check for man pages-- and remove--
         ;;
         *)
         if [[ -n $2 ]]
@@ -60,4 +74,5 @@ makecommand () {
     esac
 }
 
-makecommand $1 $2
+
+makecommand $1 $2 $3 $4

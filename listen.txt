@@ -1,0 +1,17 @@
+.\" Manpage for mkcmd.
+.\" Contact hassenr@proton.me to correct errors or typos.
+.TH man 8 "12 May 2022" "0.0" "mkcmd man page"
+.SH NAME
+    mkcmd - make bash or python script into a shell command
+.SH SYNOPSIS
+    mkcmd [ new command name ] [ script ]
+.SH DESCRIPTION
+    mkcmd automates the process of making a script 
+    written bash or python work as a command in the bash shell.
+.SH EXAMPLES
+    mkcmd newcmd myscript.sh
+    mkcmd newcmd myscript.py
+.SH BUGS 
+    script path must be relative, absolute paths cannot be used
+.SH AUTHOR
+Robert Hassenmayer
